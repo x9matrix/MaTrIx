@@ -8,10 +8,13 @@ document.addEventListener("DOMContentLoaded", function() {
     // التأكد من أن gtag جاهز قبل تسجيل النقرات
     if (typeof gtag !== 'undefined') {
         document.querySelectorAll("a").forEach(function(link) {
-            link.addEventListener("click", function() {
+            link.addEventListener("click", function(event) {
+                let clickedUrl = this.href; // الحصول على الرابط الذي تم النقر عليه
+                console.log("تم النقر على الرابط:", clickedUrl); // عرض الرابط في Console للتأكد
+
                 gtag('event', 'click', {
                     'event_category': 'روابط شخصية',
-                    'event_label': this.href
+                    'event_label': clickedUrl // إرسال الرابط إلى Google Analytics
                 });
             });
         });
